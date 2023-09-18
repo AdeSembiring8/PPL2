@@ -27,7 +27,7 @@
 
 #### Delivered:	 5 SP
 ### During Sprint
-2023-09-018:
+2023-09-18:
 
 1. Feedback
 1. Blocker
