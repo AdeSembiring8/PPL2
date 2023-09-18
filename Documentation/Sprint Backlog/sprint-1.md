@@ -16,14 +16,14 @@
 ### Breakdown Task:
 #### Commitment: 
 - Kamal :
-  - [v] TASK-1
-  - [v] TASK-2
+  - [x] TASK-1
+  - [x] TASK-2
 - Ade   : 
-  - [v] TASK-3 
+  - [x] TASK-3 
 - Andaru: 
-  - [v] TASK-4 
+  - [x] TASK-4 
 - Attila: 
-  - [v] TASK-5 
+  - [x] TASK-5 
 
 #### Delivered:	 
 ### During Sprint
