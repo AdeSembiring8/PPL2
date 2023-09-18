@@ -14,7 +14,7 @@
 - Membuat Slide Presentation
 
 ### Breakdown Task:
-#### Commitment: 
+#### Commitment: 5 SP
 - Kamal :
   - [x] TASK-1
   - [x] TASK-2
@@ -25,7 +25,7 @@
 - Attila: 
   - [x] TASK-5 
 
-#### Delivered:	 
+#### Delivered:	 5 SP
 ### During Sprint
 2023-09-018:
 
