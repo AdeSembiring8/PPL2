@@ -15,13 +15,13 @@
 ### Breakdown Task:
 #### Commitment: 4 SP
 - Kamal :
-  - [] Memakai dan menimplementasi API auth
+  - [ ] Memakai dan menimplementasi API auth
 - Ade   : 
-  - [] Membuat Page Register 
+  - [ ] Membuat Page Register 
 - Andaru: 
   - [x] Membuat Desain Login & Register 
 - Attila: 
-  - [] Membuat Page Login
+  - [ ] Membuat Page Login
 #### Delivered:	 5 SP
 ### During Sprint
 25-9-2023:
