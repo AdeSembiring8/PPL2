@@ -22,7 +22,7 @@
   - [x] Membuat Desain Login & Register 
 - Attila: 
   - [ ] Membuat Page Login
-#### Delivered:	 5 SP
+#### Delivered:	 1 SP
 ### During Sprint
 25-9-2023:
 
