@@ -7,7 +7,7 @@ export default function Home() {
                     <div class="flex items-center justify-between">
                         <img href="#" src='img/logosm.png'></img>
                         <div class="flex space-x-4 items-center">
-                            <a href="#" className="text-white">Pesanan Saya</a>
+                            <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <img href="#" src='img/iconUser.png'></img>
                         </div>
                     </div>
