@@ -15,14 +15,14 @@
 ### Breakdown Task:
 #### Commitment: 4 SP
 - Kamal :
-  - [ ] Memakai dan menimplementasi API auth
+  - [x] Memakai dan menimplementasi API auth
 - Ade   : 
-  - [ ] Membuat Page landing page
+  - [x] Membuat Page landing page
 - Andaru: 
   - [x] Membuat Desain Landing page & Dashboard
 - Attila: 
-  - [ ] Membuat Page Dashboard
-#### Delivered:	 1 SP
+  - [x] Membuat Page Dashboard
+#### Delivered:	 4 SP
 ### During Sprint
 9-10-2023:
 
