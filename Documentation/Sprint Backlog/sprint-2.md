@@ -22,7 +22,7 @@
   - [x] Membuat Desain Login & Register 
 - Attila: 
   - [x] Membuat Page Login
-#### Delivered:	 1 SP
+#### Delivered:	 3 SP
 ### During Sprint
 25-9-2023:
 
@@ -30,4 +30,4 @@
 1. Blocker
 ### Notes Sprint Review
 1. - 
-2. - Masih dalam tahap eksplorasi API dan tailwind CSS
+2. - 
