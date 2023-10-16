@@ -1,9 +1,9 @@
-# Sprint 1
+# Sprint 2
 
 
 |Date|18 September 2023|
 | :- | :- |
-|Created by|Ade Sembiring|
+|Created by|Attila An Naufal|
 |Participant|Andaru, Irka, Attila, Ade|
 ## Sprint Planning
 ### Goals:
@@ -17,11 +17,11 @@
 - Kamal :
   - [ ] Memakai dan menimplementasi API auth
 - Ade   : 
-  - [ ] Membuat Page Register 
+  - [x] Membuat Page Register 
 - Andaru: 
   - [x] Membuat Desain Login & Register 
 - Attila: 
-  - [ ] Membuat Page Login
+  - [x] Membuat Page Login
 #### Delivered:	 1 SP
 ### During Sprint
 25-9-2023:
