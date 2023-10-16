@@ -30,14 +30,6 @@ func Login(username, password string) bool {
     return true
 }
 
-func RegisterHandler(w http.ResponseWriter, r *http.Request) {
-    // Handle user registration here
-}
-
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-    // Handle user login here
-}
-
 func main() {
     ConnectDB()
     r := mux.NewRouter()
