@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -559,8 +560,42 @@ func getTransactionsByUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Success", "data": transactions})
 }
 
-func test(c *gin.Context) {
-	c.String(http.StatusOK, "Hello worlds")
+func generateAvatar(c *gin.Context) {
+	// Define the target URL
+	targetURL := "https://ui-avatars.com/api" + c.Request.URL.Path + "?" + c.Request.URL.RawQuery
+
+	// Create a new request to the target URL
+	req, err := http.NewRequest(c.Request.Method, targetURL, c.Request.Body)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to create request to target URL")
+		return
+	}
+
+	// Copy headers from the original request to the new request
+	req.Header = make(http.Header)
+	for key, values := range c.Request.Header {
+		req.Header[key] = values
+	}
+
+	// Perform the request to the target URL
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to perform request to target URL")
+		return
+	}
+	defer resp.Body.Close()
+
+	// Copy the response headers to the client response
+	for key, values := range resp.Header {
+		c.Writer.Header()[key] = values
+	}
+
+	// Set the status code
+	c.Status(resp.StatusCode)
+
+	// Copy the response body to the client response
+	io.Copy(c.Writer, resp.Body)
 }
 
 func main() {
@@ -591,23 +626,26 @@ func main() {
 	}
 
 	router := gin.New()
-	router.POST("/api/testing", test)
-	router.POST("/api/register", registerUser)
-	router.POST("/api/login", loginUser)
-	router.GET("/api/login/google", loginGoogle)
-	router.GET("/api/login/google/callback", loginGoogleCallback)
-	router.POST("/api/logout", logoutUser)
-	router.GET("/api/products", getProducts)
-	router.GET("/api/products/:id", getProduct)
-	router.GET("/api/categories", getCategories)
-	router.GET("/api/provinces", getProvinces)
-	router.GET("/api/regencies/:id", getRegencies)
-	router.GET("/api/districts/:id", getDistricts)
-	router.GET("/api/villages/:id", getVillages)
-	router.GET("/api/transactions/:id", getTransactionsByUser)
-	router.POST("/api/checkout", checkout)
-	router.POST("/api/notification/midtrans", midtransNotification)
+	api := router.Group("/api")
+	{
+		api.POST("/register", registerUser)
+		api.POST("/login", loginUser)
+		api.GET("/login/google", loginGoogle)
+		api.GET("/login/google/callback", loginGoogleCallback)
+		api.POST("/logout", logoutUser)
+		api.GET("/products", getProducts)
+		api.GET("/products/:id", getProduct)
+		api.GET("/categories", getCategories)
+		api.GET("/provinces", getProvinces)
+		api.GET("/regencies/:id", getRegencies)
+		api.GET("/districts/:id", getDistricts)
+		api.GET("/villages/:id", getVillages)
+		api.GET("/transactions/:id", getTransactionsByUser)
+		api.POST("/checkout", checkout)
+		api.POST("/notification/midtrans", midtransNotification)
+		api.GET("/generateAvatar", generateAvatar)
+	}
 
 	fmt.Printf("Start server on localhost:%d\n", 8080)
-	router.Run(fmt.Sprintf("localhost:%d", 8080))
+	router.Run(fmt.Sprintf(":%d", 8080))
 }
