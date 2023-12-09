@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -11,7 +10,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/apex/gateway"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -566,14 +564,10 @@ func test(c *gin.Context) {
 }
 
 func main() {
-	port := flag.Int("port", -1, "specify a port to use http rather than AWS Lambda")
-	flag.Parse()
 
-	if *port != -1 {
-		err := godotenv.Load()
-		if err != nil {
-			panic(err)
-		}
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
 	}
 
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
@@ -614,10 +608,6 @@ func main() {
 	router.POST("/api/checkout", checkout)
 	router.POST("/api/notification/midtrans", midtransNotification)
 
-	if *port != -1 {
-		fmt.Printf("Start server on localhost:%d\n", *port)
-		router.Run(fmt.Sprintf("localhost:%d", *port))
-	} else {
-		log.Fatal(gateway.ListenAndServe(fmt.Sprintf(":%d", *port), router))
-	}
+	fmt.Printf("Start server on localhost:%d\n", 8080)
+	router.Run(fmt.Sprintf("localhost:%d", 8080))
 }
