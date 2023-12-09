@@ -1,4 +1,5 @@
 [build]
+  go = "1.21"
   command = "chmod +x ./build.sh && ./build.sh"
   functions = "functions"
   publish = "public"
