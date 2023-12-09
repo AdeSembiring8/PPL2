@@ -561,6 +561,10 @@ func getTransactionsByUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Success", "data": transactions})
 }
 
+func test(c *gin.Context) {
+	c.String(http.StatusOK, "Hello worlds")
+}
+
 func main() {
 	port := flag.Int("port", -1, "specify a port to use http rather than AWS Lambda")
 	flag.Parse()
@@ -593,6 +597,7 @@ func main() {
 	}
 
 	router := gin.New()
+	router.POST("/api/testing", registerUser)
 	router.POST("/api/register", registerUser)
 	router.POST("/api/login", loginUser)
 	router.GET("/api/login/google", loginGoogle)
