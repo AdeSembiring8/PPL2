@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/veritrans/go-midtrans"
@@ -626,6 +627,10 @@ func main() {
 	}
 
 	router := gin.New()
+
+	// Use the CORS middleware with default configuration
+	router.Use(cors.Default())
+
 	api := router.Group("/api")
 	{
 		api.POST("/register", registerUser)
