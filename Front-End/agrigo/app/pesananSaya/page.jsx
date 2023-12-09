@@ -6,10 +6,14 @@ export default function Home() {
             <nav class=" bg-lime-700 px-4">
                 <div class="container mx-auto">
                     <div class="flex items-center justify-between">
-                        <img href="/landingPage" src='img/logosm.png'></img>
+                        <a href="landingPage">
+                            <img href="/landingPage" src='img/logosm.png'></img>
+                        </a>
                         <div class="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
-                            <img href="#" src='img/iconUser.png'></img>
+                            <a href="/profil">
+                                <img href="/profil" src='img/iconUser.png'></img>
+                            </a>
                         </div>
                     </div>
                 </div>

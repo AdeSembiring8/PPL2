@@ -11,8 +11,8 @@ export default function Home() {
 
         <form className="px-5 mx-10 mt-10">
           <div>
-            <label className="" for="email">E-mail</label><br />
-            <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="text" id="email" name="email" /> <br />
+            <label className="" for="username">Username</label><br />
+            <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="text" id="username" name="username" /> <br />
           </div>
           <div className="pt-5">
             <label className="" for="password">Password</label><br />
@@ -22,9 +22,9 @@ export default function Home() {
             <a>Lupa Password?</a>
           </div>
           <div className="mt-10">
-              <button className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold'>
-                <a href='aboutus'>Login</a> 
-              </button>
+            <button className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold'>
+              <a href='aboutus'>Login</a>
+            </button>
           </div>
         </form>
         <hr className="mx-10 mt-16 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>

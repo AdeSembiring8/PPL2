@@ -12,8 +12,8 @@ export default function Home() {
 
                 <form className="px-5 mx-10 mt-10">
                     <div>
-                        <label className="" for="email">E-mail</label><br />
-                        <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="text" id="email" name="email" /> <br />
+                        <label className="" for="username">Username</label><br />
+                        <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="text" id="username" name="username" /> <br />
                     </div>
                     <div className="pt-5">
                         <label className="" for="password">Password</label><br />

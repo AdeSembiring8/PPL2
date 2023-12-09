@@ -6,10 +6,14 @@ export default function page() {
       <nav class=" bg-lime-700 px-4">
         <div class="container mx-auto">
           <div class="flex items-center justify-between">
-            <img href="#" src='img/logosm.png'></img>
+            <a href="dashboard">
+              <img href="/landingPage" src='img/logosm.png'></img>
+            </a>
             <div class="flex space-x-4 items-center">
-              <a href="/login" className="text-white">User</a>
-              <img href="#" src='img/logosm.png'></img>
+              <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
+              <a href="/profil">
+                <img href="/profil" src='img/iconUser.png'></img>
+              </a>
             </div>
           </div>
         </div>
@@ -78,7 +82,7 @@ export default function page() {
             </div>
           </div>
           <div className="search">
-          <div className="card block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full">
+            <div className="card block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full">
               <div className="flex justify-between">
                 <div className="flex">
                   <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" src='https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcR9HnulCAFkllQVXlFhwtgtsTHN3TSFu1x-FtRi7vYAwuLnyfSbT2N9tPeKEWhZGQww'></img>
