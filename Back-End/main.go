@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -10,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/apex/gateway"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -560,6 +562,9 @@ func getTransactionsByUser(c *gin.Context) {
 }
 
 func main() {
+	port := flag.Int("port", -1, "specify a port to use http rather than AWS Lambda")
+	flag.Parse()
+
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
@@ -585,7 +590,7 @@ func main() {
 		Endpoint:     google.Endpoint,
 	}
 
-	router := gin.Default()
+	router := gin.New()
 	router.POST("/api/register", registerUser)
 	router.POST("/api/login", loginUser)
 	router.GET("/api/login/google", loginGoogle)
@@ -602,6 +607,10 @@ func main() {
 	router.POST("/api/checkout", checkout)
 	router.POST("/api/notification/midtrans", midtransNotification)
 
-	fmt.Println("Start server on localhost:8080")
-	router.Run("localhost:8080")
+	if *port != -1 {
+		fmt.Printf("Start server on localhost:%d\n", *port)
+		router.Run(fmt.Sprintf("localhost:%d", *port))
+	} else {
+		log.Fatal(gateway.ListenAndServe(fmt.Sprintf(":%d", *port), router))
+	}
 }
