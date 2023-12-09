@@ -597,7 +597,7 @@ func main() {
 	}
 
 	router := gin.New()
-	router.POST("/api/testing", registerUser)
+	router.POST("/api/testing", test)
 	router.POST("/api/register", registerUser)
 	router.POST("/api/login", loginUser)
 	router.GET("/api/login/google", loginGoogle)
