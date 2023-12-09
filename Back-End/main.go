@@ -565,9 +565,11 @@ func main() {
 	port := flag.Int("port", -1, "specify a port to use http rather than AWS Lambda")
 	flag.Parse()
 
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
+	if *port != -1 {
+		err := godotenv.Load()
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
