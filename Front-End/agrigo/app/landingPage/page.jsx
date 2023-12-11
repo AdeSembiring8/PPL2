@@ -1,27 +1,6 @@
 import Image from 'next/image';
-// import { useEffect } from 'react';
-// import Link from 'next/link';
 
 export default function Home() {
-
-    // useEffect(() => {
-
-    //     const navigationLinks = document.querySelectorAll('.text-white');
-
-    //     navigationLinks.forEach(link => {
-    //       link.addEventListener('click', function(e) {
-    //         e.preventDefault(); 
-
-    //         const targetId = this.getAttribute('href').substring(1); 
-
-    //         const targetElement = document.getElementById(targetId); 
-
-    //         if (targetElement) {
-    //           targetElement.scrollIntoView({ behavior: 'smooth' });
-    //         }
-    //       });
-    //     });
-    //   }, []);
 
     return (
         <>
@@ -114,5 +93,5 @@ export default function Home() {
 
         </>
 
-    )
-}
+    );
+};
