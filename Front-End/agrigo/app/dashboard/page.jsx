@@ -1,11 +1,19 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Page() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  // const router = useRouter();
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isCheckoutModalVisible, setCheckoutModalVisible] = useState(false);
+  const [selectedProductQuantity, setSelectedProductQuantity] = useState({});
+  const [productDetails, setProductDetails] = useState(null);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +33,14 @@ export default function Page() {
     fetchData();
   }, [setProducts]);
 
+  // const handleAddToCart = (product) => {
+  //   setSelectedProducts([...selectedProducts, product]);
+  //   setSelectedProductQuantity({
+  //     ...selectedProductQuantity,
+  //     [product._id]: 1, // Set the default quantity to 1
+  //   });
+  // };
+
   const handleSearch = async (event) => {
     event.preventDefault();
 
@@ -39,8 +55,52 @@ export default function Page() {
     }
   };
 
+  //membuat tampilan Modal
+  const handleCheckout = () => {
+    setCheckoutModalVisible(true);
+  };
+  // Fungsi untuk menutup modal checkout
+  const handleCloseCheckoutModal = () => {
+    setCheckoutModalVisible(false);
+  };
+
   const productNames = products.map(product => product.name);
 
+
+  // Fungsi untuk mengambil detail produk berdasarkan ID
+  const getProductById = async (productId) => {
+    try {
+      const response = await fetch(`http://52.221.249.20:8080/api/products/${productId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data.data; // Mengembalikan data produk
+      } else {
+        console.error('Error fetching product details:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+    }
+  };
+
+  const handleProductDetails = async (productId) => {
+    const productDetails = await getProductById(productId);
+    console.log('Product Details:', productDetails);
+
+    setSelectedProductQuantity({
+      ...selectedProductQuantity,
+      [productId]: 1,
+    });
+
+    // Tampilkan modal checkout
+    setCheckoutModalVisible(true);
+  };
+
+  const handleQuantityChange = (productId, newQuantity) => {
+    setSelectedProductQuantity({
+      ...selectedProductQuantity,
+      [productId]: newQuantity,
+    });
+  };
   return (
     <>
       <nav className=" bg-lime-700 px-4">
@@ -65,7 +125,7 @@ export default function Page() {
         <div className="grid grid-cols-3">
           <div className="col-span-2">
             {/* Menampilkan hasil pencarian */}
-            {searchResults.map((product) => (
+            {/* {searchResults.map((product) => (
               <div key={product._id} className="card block rounded-lg bg-custom-F2F2F2 p-1 m-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.8),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full">
                 <div className="flex justify-between">
                   <div className="flex">
@@ -90,7 +150,7 @@ export default function Page() {
                   </a>
                 </div>
               </div>
-            ))}
+            ))} */}
 
             {/* Menampilkan produk yang bukan hasil pencarian */}
             {products.reduce((rows, product, index) => {
@@ -112,29 +172,48 @@ export default function Page() {
                           </p>
                         </div>
                       </div>
-                      <a href='/checkout'>
-                        <button
-                          type="button"
-                          className="self-end  text-black rounded bg-primary px-6 pb-2 pt-2.5 text-4xl font-extrabold uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] "
-                          data-te-ripple-init
-                          data-te-ripple-color="light"
-                        >
-                          +
-                        </button>
-                      </a>
+                      <button
+                        type="button"
+                        className="self-end  text-black rounded bg-primary px-6 pb-2 pt-2.5 text-4xl font-extrabold uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] "
+                        data-te-ripple-init
+                        data-te-ripple-color="light"
+                        onClick={() => handleProductDetails(product._id)}>
+                        +
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             ))}
           </div>
+
+          {/* Modal Checkout */}
+          {isCheckoutModalVisible && (
+            <div>
+              {productDetails ? (
+                <div>
+                  <h1>{productDetails.name}</h1>
+                  <p>Category: {productDetails.category}</p>
+                  <img src={productDetails.image} alt={productDetails.name} />
+                  <p>Price: {productDetails.price}</p>
+                  <p>Unit: {productDetails.unit}</p>
+                  {/* Tambahan informasi lainnya jika ada */}
+                </div>
+              ) : (
+                <p>Loading product details...</p>
+              )}
+              {/* Tambahkan komponen atau tampilan lainnya */}
+            </div>
+          )}
+
+
           <div className="col-span-1 pl-12 pt-4">
             {/* Card untuk kategori dan pencarian */}
             <div className="card block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full">
               <h2 className="text-xl font-bold mb-2 text-stone-950 ">Cari Produk</h2>
               <form className='flex' onSubmit={handleSearch}>
-                <input type="text" id='search' placeholder="Cari produk..." className="w-full p-2 rounded-md border text-black border-gray-300" value={searchTerm}  
-                  onChange={(e) => setSearchTerm(e.target.value)}  
+                <input type="text" id='search' placeholder="Cari produk..." className="w-full p-2 rounded-md border text-black border-gray-300" value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <button type="submit" className="bg-primary text-lime-900 py-2 px-4 rounded-md">Cari</button>
               </form>
@@ -148,8 +227,6 @@ export default function Page() {
                 <p>Buah-buahan</p>
                 <p>Sayur-sayuran</p>
               </div>
-
-
 
               {/* Tambahkan elemen HTML untuk form pencarian */}
 
