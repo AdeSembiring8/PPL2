@@ -1,19 +1,20 @@
 'use client'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
+// import { useRouter } from 'next/router';
+// import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 
 export default function Page() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
   // const router = useRouter();
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
   const [isCheckoutModalVisible, setCheckoutModalVisible] = useState(false);
   const [selectedProductQuantity, setSelectedProductQuantity] = useState({});
   const [productDetails, setProductDetails] = useState(null);
-
-
+  // const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure({ defaultOpen: true });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,9 +57,6 @@ export default function Page() {
   };
 
   //membuat tampilan Modal
-  const handleCheckout = () => {
-    setCheckoutModalVisible(true);
-  };
   // Fungsi untuk menutup modal checkout
   const handleCloseCheckoutModal = () => {
     setCheckoutModalVisible(false);
@@ -84,7 +82,10 @@ export default function Page() {
 
   const handleProductDetails = async (productId) => {
     const productDetails = await getProductById(productId);
-    console.log('Product Details:', productDetails);
+
+    console.log('Product Detail:', productDetails);
+    setProductDetails(productDetails);
+
 
     setSelectedProductQuantity({
       ...selectedProductQuantity,
@@ -93,6 +94,7 @@ export default function Page() {
 
     // Tampilkan modal checkout
     setCheckoutModalVisible(true);
+    return productDetails;
   };
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -168,7 +170,7 @@ export default function Page() {
                           <h5 className="mb-2 text-xl mt-4 font-bold leading-tight text-black">{product.name}</h5>
                           <p className="mb-4 text-base text-slate-500 font-medium ">{product.category}</p>
                           <p className="mt-4 mb-0 text-start text-lg text-black font-medium">
-                            {`Rp${product.price} / ${product.unit}`}
+                            {`Rp ${product.price.toLocaleString('id-ID')} / ${product.unit}`}
                           </p>
                         </div>
                       </div>
@@ -191,18 +193,47 @@ export default function Page() {
           {isCheckoutModalVisible && (
             <div>
               {productDetails ? (
-                <div>
-                  <h1>{productDetails.name}</h1>
-                  <p>Category: {productDetails.category}</p>
-                  <img src={productDetails.image} alt={productDetails.name} />
-                  <p>Price: {productDetails.price}</p>
-                  <p>Unit: {productDetails.unit}</p>
-                  {/* Tambahan informasi lainnya jika ada */}
+                <div className=' text-black card block rounded-lg bg-custom-F2F2F2 p-1 m-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.8),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full'>
+                  <p className='ml-4 mt-8 text-2xl font-bold'> Produk Yang Dipilih</p>
+                  <div className=' text-black card block rounded-lg bg-custom-F2F2F2 p-1 mx-4 mb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.8),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
+                    <div className="flex justify-between">
+                      <div className="flex">
+                        <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" src={productDetails.image} alt={productDetails.name}></img>
+                        <div className="flex flex-col m-0">
+                          <h5 className="mb-2 text-xl mt-4 font-bold leading-tight">{productDetails.name}</h5>
+                          <p className="mb-4 text-base text-slate-500 font-medium ">{productDetails.category}</p>
+                          <p className="mt-4 mb-0 text-start text-lg font-medium">
+                            {`Rp${productDetails.price.toLocaleString('id-ID')} / ${productDetails.unit}`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='ml-2 '>
+                    <p className=' ml-4 mt-8 text-2xl font-bold'> Kuantitas Pesanan </p>
+                    <div className='flex'>
+                      <div className=' flex card rounded-lg bg-slate-30  p-1 ml-4 mb-4 w-fit shadow-[0_2px_15px_-3px_rgba(0,0,0,0.8),0_10px_20px_-2px_rgba(0,0,0,0.04)] '>
+                        <input type="number" id='kuantitas' step={1} min={1} max={1000}
+                          className=' border-spacing-4 p-2 m-1 rounded-xl w-20' onChange={(e) => { setSelectedProductQuantity(e.target.value) }} />
+                        <p className='mt-3 mb-0 text-start text-lg font-medium mr-2 w-fit'>{productDetails.unit} </p>
+                      </div>
+                      <div>
+                        <a href={`/checkout/${productDetails._id}?qty=${selectedProductQuantity}`}>
+                          <button className=' text-white text-lg bg-custom-92B150 w-36 self-end h-10 rounded-lg my-5 ml-36' >
+                            Checkout
+                          </button>
+
+                        </a>
+                      </div>
+                      <button className=' bg-red-500 w-36 h-10 rounded-lg my-5 text-lg text-white ml-2'
+                        onClick={() => handleCloseCheckoutModal()}>cancel</button>
+                    </div>
+                  </div>
+
                 </div>
               ) : (
-                <p>Loading product details...</p>
+                <p className=' text-black'>Loading product details...</p>
               )}
-              {/* Tambahkan komponen atau tampilan lainnya */}
             </div>
           )}
 
@@ -227,9 +258,6 @@ export default function Page() {
                 <p>Buah-buahan</p>
                 <p>Sayur-sayuran</p>
               </div>
-
-              {/* Tambahkan elemen HTML untuk form pencarian */}
-
             </div>
           </div>
         </div>
@@ -252,5 +280,5 @@ async function fetchData() {
   const response = await fetch('https://52.221.249.20:8080/api/products');
   const data = await response.json();
 
-  return data.data; // pastikan Anda mengambil array 'data' dari objek respons
+  return data.data;
 }

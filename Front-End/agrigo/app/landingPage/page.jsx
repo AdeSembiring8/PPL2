@@ -9,10 +9,8 @@ export default function Home() {
                     <div class="flex items-center justify-between">
                         <img href="#" src='img/logosm.png'></img>
                         <div class="space-x-4">
-                            <a href="#" className="text-white">Kategori</a>
                             <a href="#produkkami" className="text-white">Produk Kami</a>
                             <a href="#tentangkami" className="text-white">Tentang Kami</a>
-                            <a href="/login" className="text-white">Login</a>
                         </div>
                     </div>
                 </div>

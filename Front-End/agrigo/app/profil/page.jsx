@@ -3,13 +3,13 @@ import Image from 'next/image'
 export default function Home() {
     return (
         <>
-            <nav class=" bg-lime-700 px-4">
-                <div class="container mx-auto">
-                    <div class="flex items-center justify-between">
+            <nav className=" bg-lime-700 px-4">
+                <div className="container mx-auto">
+                    <div className="flex items-center justify-between">
                     <a href="landingPage">
                             <img href="/landingPage" src='img/logosm.png'></img>
                         </a>
-                        <div class="flex space-x-4 items-center">
+                        <div className="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <a href="/profil">
                                 <img href="/profil" src='img/iconUser.png'></img>
@@ -43,7 +43,7 @@ export default function Home() {
                                 </div>
                                 <div>
                                     <button className=" text-red-600 bg-white border-red-600 border-2 w-96 h-10 rounded-lg font-bold">
-                                        Hapus Foto
+                                        Logout
                                     </button>
                                 </div>
                             </div>
