@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { handleCloseModalAlamat } from './page.jsx';
 
-const ProvinceDropdown = ({ onSelectProvince }) => {
+
+const ProvinceDropdown = ({ onSelectProvince, oneCloseModalAlamat }) => {
     const [selectedProvince, setSelectedProvince] = useState('');
+    const [selectedRegencyId, setSelectedRegencyId] = useState('');
+    const [selectedDistrictId, setSelectedDistictId] = useState('');
+    const [selectedVillageId, setSelectedVillageId] = useState('');
+    const [valueAlamat, setValueAlamat] = useState('');
     const [provinces, setProvinces] = useState([]);
     const [regencies, setRegencies] = useState([]);
     const [districts, setDistricts] = useState([]);
@@ -9,6 +15,25 @@ const ProvinceDropdown = ({ onSelectProvince }) => {
     const [isLoadingRegencies, setIsLoadingRegencies] = useState(false);
     const [isLoadingDistricts, setIsLoadingDistricts] = useState(false);
     const [isLoadingVillages, setIsLoadingVillages] = useState(false);
+
+    const [selectedProvinceName, setSelectedProvinceName] = useState('');
+    const [selectedRegencyName, setSelectedRegencyName] = useState('');
+    const [selectedDistrictName, setSelectedDistrictName] = useState('');
+    const [selectedVillageName, setSelectedVillageName] = useState('');
+
+    // const handleCloseModal = () => {
+    //     // Meneruskan nilai-nilai terpilih ke page.jsx setelah modal ditutup
+    //     onCloseModalAlamat({
+    //         selectedProvince,
+    //         selectedProvinceName,
+    //         selectedRegencyId,
+    //         selectedRegencyName,
+    //         selectedDistrictId,
+    //         selectedDistrictName,
+    //         selectedVillageId,
+    //         selectedVillageName,
+    //     });
+    // };
 
     useEffect(() => {
         async function fetchProvinces() {
@@ -81,8 +106,22 @@ const ProvinceDropdown = ({ onSelectProvince }) => {
 
     const handleProvinceChange = (event) => {
         const selectedValue = event.target.value;
+        const selectedProvinceName = event.target.options[event.target.selectedIndex].text;
         setSelectedProvince(selectedValue);
-        onSelectProvince(selectedValue);
+        setSelectedProvinceName(selectedProvinceName);
+        onSelectProvince({
+            provinceId: selectedValue,
+            provinceName: selectedProvinceName,
+
+            regencyId: '',
+            regencyName: '',
+
+            districtId: '',
+            districtName: '',
+
+            villageId: '',
+            villageName: ''
+        });
         if (selectedValue !== '') {
             fetchRegenciesByProvinceId(selectedValue);
             setDistricts([]);
@@ -95,10 +134,27 @@ const ProvinceDropdown = ({ onSelectProvince }) => {
     };
 
     const handleRegencyChange = (event) => {
-        const selectedValueRegency = event.target.value;
-        if (selectedValueRegency !== '') {
-            fetchDistrictsByRegencyId(selectedValueRegency);
+        const selectedValue = event.target.value;
+        const selectedRegencyName = event.target.options[event.target.selectedIndex].text;
+        setSelectedRegencyId(selectedValue);
+        setSelectedRegencyName(selectedRegencyName);
+        onSelectProvince({
+            provinceId: selectedProvince,
+            provinceName: selectedProvinceName,
+
+            regencyId: selectedValue,
+            regencyName: selectedRegencyName,
+
+            districtId: '',
+            districtName: '',
+
+            villageId: '',
+            villageName: ''
+        })
+        if (selectedValue !== '') {
+            fetchDistrictsByRegencyId(selectedValue);
             setVillages([]);
+            setSelectedRegencyId(selectedValue); // Atur ulang nilai ID kabupaten/kota yang dipilih
         } else {
             setDistricts([]);
             setVillages([]);
@@ -106,90 +162,154 @@ const ProvinceDropdown = ({ onSelectProvince }) => {
     };
 
     const handleDistrictChange = (event) => {
-        const selectedValueDistrict = event.target.value;
-        if (selectedValueDistrict !== '') {
-            fetchVillagesByDistrictId(selectedValueDistrict);
+        const selectedValue = event.target.value;
+        const selectedDistrictName = event.target.options[event.target.selectedIndex].text;
+        setSelectedDistictId(selectedValue);
+        setSelectedDistrictName(selectedDistrictName);
+        onSelectProvince({
+            provinceId: selectedProvince,
+            provinceName: selectedProvinceName,
+
+            regencyId: selectedRegencyId,
+            regencyName: selectedRegencyName,
+
+            districtId: selectedValue,
+            districtName: selectedDistrictName,
+
+            villageId: '',
+            villageName: ''
+        })
+        if (selectedValue !== '') {
+            fetchVillagesByDistrictId(selectedValue);
+            setSelectedDistictId(selectedValue)
         } else {
             setVillages([]);
         }
     };
 
+
+    const handleVillageChange = (event) => {
+        const selectedValue = event.target.value;
+        const selectedVillageName = event.target.options[event.target.selectedIndex].text;
+        setSelectedVillageId(selectedValue);
+        setSelectedVillageName(selectedVillageName);
+        onSelectProvince({
+            provinceId: selectedProvince,
+            provinceName: selectedProvinceName,
+
+            regencyId: selectedRegencyId,
+            regencyName: selectedRegencyName,
+
+            districtId: selectedDistrictId,
+            districtName: selectedDistrictName,
+
+            villageId: selectedValue,
+            villageName: selectedVillageName
+        })
+    };
+
+    const handleAddAddress = (e) => {
+        const valueAlamat = e.target.value;
+        setValueAlamat(valueAlamat);
+    }
+
+    const handleCloseModal = () => {
+        oneCloseModalAlamat(valueAlamat);
+    }
+
+    console.log(valueAlamat);
+
     return (
-        <div>
-            <label htmlFor="provinceDropdown">Pilih Provinsi:</label>
-            <select
-                id="provinceDropdown"
-                value={selectedProvince}
-                onChange={handleProvinceChange}
-            >
-                <option value="">Pilih Provinsi</option>
-                {provinces.map((province) => (
-                    <option key={province.id} value={province.id}>
-                        {province.name}
-                    </option>
-                ))}
-            </select>
-
-            {isLoadingRegencies && <p>Loading Regencies...</p>}
-
-            {regencies.length > 0 && (
-                <div>
-                    <label htmlFor="regencyDropdown">Pilih Kabupaten/Kota:</label>
-                    <select
-                        id="regencyDropdown"
-                        value={regencies.id}
-                        onChange={handleRegencyChange}
-                    >
-                        <option value="">Pilih Kabupaten/Kota</option>
-                        {regencies.map((regency) => (
-                            <option key={regency.id} value={regency.id}>
-                                {regency.name}
-                            </option>
-                        ))}
-                    </select>
+        <div className="block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-fit">
+            <div className=" text-lg">
+            <h1 className='text-black text-xl font-semibold text-center pb-5'> Ubah Alamat Pengiriman </h1>
+                <div className='mb-4'>
+                    <label className=' font-bold' htmlFor="Alamat">Alamat </label>
+                    <div className=' text-base'>
+                        <textarea value={valueAlamat} onChange={handleAddAddress}
+                            className=' rounded-xl  p-2 w-full resize-none' rows={2} />
+                    </div>
                 </div>
-            )}
-
-            {isLoadingDistricts && <p>Loading Districts...</p>}
-
-            {districts.length > 0 && (
-                <div>
-                    <label htmlFor="districtDropdown">Pilih Kecamatan:</label>
-                    <select
-                        id="districtDropdown"
-                        value={districts.id}
-                        onChange={handleDistrictChange}
-                    >
-                        <option value="">Pilih Kecamatan</option>
-                        {districts.map((district) => (
-                            <option key={district.id} value={district.id}>
-                                {district.name}
-                            </option>
-                        ))}
-                    </select>
+                <div className='mb-4'>
+                    <label className=' text-lg font-bold' htmlFor="provinceDropdown">Provinsi</label>
+                    <div>
+                        <select className=' rounded-xl w-fit p-1'
+                            id="provinceDropdown"
+                            value={selectedProvince}
+                            onChange={handleProvinceChange}
+                        >
+                            <option value="">Pilih Provinsi</option>
+                            {provinces.map((province) => (
+                                <option key={province.id} value={province.id}>
+                                    {province.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-            )}
+                {isLoadingRegencies && <p>Loading Regencies...</p>}
 
-            {isLoadingVillages && <p>Loading Villages...</p>}
-
-            {villages.length > 0 && (
-                <div>
-                    <label htmlFor="villageDropdown">Pilih Kelurahan:</label>
-                    <select
-                        id="villageDropdown"
-                        value={villages.id}
-                        onChange={() => { }}
-                    >
-                        <option value="">Pilih Kelurahan</option>
-                        {villages.map((village) => (
-                            <option key={village.id} value={village.id}>
-                                {village.name}
-                            </option>
-                        ))}
-                    </select>
+                <div className='mb-4'>
+                    <label className=' text-lg font-bold' htmlFor="regencyDropdown">Kabupaten/Kota </label>
+                    <div>
+                        <select className=' rounded-xl w-full p-1'
+                            id="regencyDropdown"
+                            value={regencies.id}
+                            onChange={handleRegencyChange}
+                        >
+                            <option value="">Pilih Kabupaten/Kota</option>
+                            {regencies.map((regency) => (
+                                <option key={regency.id} value={regency.id}>
+                                    {regency.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-            )}
-            
+                {isLoadingDistricts && <p>Loading Districts...</p>}
+
+                <div className='mb-4'>
+                    <label className=' text-lg font-bold' htmlFor="districtDropdown">Pilih Kecamatan:</label>
+                    <div>
+                        <select className=' rounded-xl w-full p-1'
+                            id="districtDropdown"
+                            value={districts.id}
+                            onChange={handleDistrictChange}
+                        >
+                            <option value="">Pilih Kecamatan</option>
+                            {districts.map((district) => (
+                                <option key={district.id} value={district.id}>
+                                    {district.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                {isLoadingVillages && <p>Loading Villages...</p>}
+
+                <div className='mb-4'>
+                    <label className=' text-lg font-bold' htmlFor="villageDropdown">Pilih Kelurahan:</label>
+                    <div>
+                        <select className=' rounded-xl w-full p-1'
+                            id="villageDropdown"
+                            value={villages.id}
+                            onChange={handleVillageChange}
+                        >
+                            <option value="">Pilih Kelurahan</option>
+                            {villages.map((village) => (
+                                <option key={village.id} value={village.id}>
+                                    {village.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button
+                onClick={handleCloseModal}
+                className=" text-white bg-custom-92B150 w-fit p-2 rounded-lg my-5">
+                Simpan Alamat
+            </button>
         </div>
     );
 };

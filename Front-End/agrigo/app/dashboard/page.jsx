@@ -8,13 +8,9 @@ import React from 'react';
 export default function Page() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  // const [searchResults, setSearchResults] = useState([]);
-  // const router = useRouter();
-  // const [selectedProducts, setSelectedProducts] = useState([]);
   const [isCheckoutModalVisible, setCheckoutModalVisible] = useState(false);
   const [selectedProductQuantity, setSelectedProductQuantity] = useState({});
   const [productDetails, setProductDetails] = useState(null);
-  // const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure({ defaultOpen: true });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,12 +93,12 @@ export default function Page() {
     return productDetails;
   };
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    setSelectedProductQuantity({
-      ...selectedProductQuantity,
-      [productId]: newQuantity,
-    });
-  };
+  // const handleQuantityChange = (productId, newQuantity) => {
+  //   setSelectedProductQuantity({
+  //     ...selectedProductQuantity,
+  //     [productId]: newQuantity,
+  //   });
+  // };
   return (
     <>
       <nav className=" bg-lime-700 px-4">

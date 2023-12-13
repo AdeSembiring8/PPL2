@@ -2,25 +2,72 @@
 import { useEffect, useState } from "react";
 import ProvinceDropdown from './ProvinceDropdown';
 
+// export const handleCloseModalAlamat = (setAlamatModalVisible) => {
+//     setAlamatModalVisible(false);
+// };
+
 export default function Home({ params }) {
     const [productDetails, setProductDetails] = useState(null);
     const [qty, setQty] = useState(null);
     const [totalPrice, setTotalPrice] = useState(null);
     const [totalFinal, setTotalFinal] = useState(null);
+    const [pengiriman, setPengiriman] = useState(null);
+    const [isAlamatModalVsible, setAlamatModalVisible] = useState(false);
+    const [isPengirimanVisible, setPengirimanVisible] = useState(false);
+    const [selectedProvince, setSelectedProvince] = useState('');
+    const [selectedRegencyId, setSelectedRegencyId] = useState('');
+    const [selectedDistrictId, setSelectedDistrictId] = useState('');
+    const [selectedVillageId, setSelectedVillageId] = useState('');
+    const [valueAlamat, setValueAlamat] = useState('');
 
-    const handleSelectProvince = (selectedValue,villages,selectedValueDistrict) => {
-        console.log('Id Provinsi : ', selectedValue);
-        console.log('Id Kabupaten : ', villages);
-        console.log('Id Kecamatan : ', selectedValueDistrict)
+    const [estimasi, setEstimasi] = useState('');
+    const [paketPengiriman, setPaketPengriman] = useState('');
+
+    const handleSelectProvince = (selectedValues) => {
+        setSelectedProvince(selectedValues.provinceName);
+        setSelectedRegencyId(selectedValues.regencyName);
+        setSelectedDistrictId(selectedValues.districtName);
+        setSelectedVillageId(selectedValues.villageName);
+
+
+    }
+    const handlePengiriman = () => {
+        setPengirimanVisible(true);
     }
 
+    const handleClosePengiriman = () => {
+        const newPengiriman = 10000;
+        const paketPengiriman = "Reguler";
+        const estimasi = "Estimasi Sampai dalam 1 hari";
+        setPaketPengriman(paketPengiriman);
+        setEstimasi(estimasi);
+        setPengiriman(newPengiriman);
+        setPengirimanVisible(false);
+
+        console.log(pengiriman);
+    }
+    const handleUbahAlamat = () => {
+        setAlamatModalVisible(true);
+    };
+
+    const handleCloseModalAlamat = (valueAlamat) => {
+        setValueAlamat(valueAlamat);
+        console.log('Alamat', valueAlamat)
+        setAlamatModalVisible(false);
+
+    };
+
+
     useEffect(() => {
+        // Menghitung ulang totalFinal saat nilai pengiriman berubah
+
+
         async function test() {
             try {
                 const response = await fetch(`http://52.221.249.20:8080/api/products/${params.id}`);
                 if (response.ok) {
                     const data = await response.json();
-                    setProductDetails(data.data)
+                    setProductDetails(data.data);
 
                     const searchParams = new URLSearchParams(location.search);
                     const qty = searchParams.get('qty');
@@ -33,6 +80,11 @@ export default function Home({ params }) {
                     const totalFinal = totalPrice + 2000;
                     setTotalFinal(totalFinal);
 
+                    // Memanggil fungsi perhitungan saat nilai pengiriman berubah
+                    if (pengiriman !== null) {
+                        const totalFinal = totalPrice + 12000;
+                        setTotalFinal(totalFinal);
+                    }
                 } else {
                     console.error('Error fetching product details:', response.status, response.statusText);
                 }
@@ -40,8 +92,19 @@ export default function Home({ params }) {
                 console.error('Error fetching product details:', error);
             }
         }
-        test()
-    }, [])
+        // const calculateTotalFinal = () => {
+        //     let totalFinal;
+        //     if (pengiriman > 0) {
+        //         const totalFinal = totalPrice + 12000;
+        //         setTotalFinal(totalFinal);
+        //     } else {
+        //         const totalFinal = totalPrice + 2000;
+        //         setTotalFinal(totalFinal);
+        //     }
+        // };
+
+        test();
+    }, [pengiriman]);
 
 
     return (
@@ -69,25 +132,39 @@ export default function Home({ params }) {
                     <div>
                         <p className=" text-black text-xl font-semibold pt-12 pb-5">Alamat Pengiriman</p>
                     </div>
-                    <div className="block rounded-lg  p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-2/5 ">
-                        <p class="text-base text-custom-7C7C7C flex ">
-                            Masukkan Alamat
+                    <div className="block rounded-lg text-black p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-2/5 ">
+                        <p
+                            class="text-base text-custom-7C7C7C flex ">
+                            {valueAlamat ? `${valueAlamat}, Provinsi ` : `Masukkan Alamat`}
+                            {selectedProvince ? `${selectedProvince}` : ``}
+                            {selectedRegencyId ? `, ${selectedRegencyId}` : ``}
+                            {selectedDistrictId ? `, Kec. ${selectedDistrictId}` : ``}
+                            {selectedVillageId ? `, Kel/Desa. ${selectedVillageId}` : ``}
                         </p>
                     </div>
                     <div>
-                        <button className=" text-white bg-custom-C2AF00 w-64 h-10 rounded-lg my-5">
+                        <button
+                            onClick={handleUbahAlamat}
+                            className=" text-white bg-custom-C2AF00 w-64 h-10 rounded-lg my-5">
                             Ubah alamat pengiriman
                         </button>
                     </div>
 
+                    {isAlamatModalVsible && (
+                        <div className=" text-black">
+                            <ProvinceDropdown onSelectProvince={handleSelectProvince} oneCloseModalAlamat={handleCloseModalAlamat} />
+
+                        </div>
+                    )}
+
                     <div>
-                        <p className=" text-black text-xl font-semibold pt-8 pb-5">Paket Pengiriman</p>
+                        <p className=" text-black text-xl font-semibold pt-8 pb-5">Produk yang Dipesan</p>
                     </div>
-                    <div className="block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-1/3">
+                    <div className="block rounded-lg bg-custom-F2F2F2 p-6 w-fit shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
                         <div className="flex justify-between">
                             <div className="flex">
                                 <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" src={productDetails != null && productDetails.image}></img>
-                                <div className=" ml-10 my-5">
+                                <div className=" ml-40 mr-20 my-5">
                                     <h5
                                         className="mb-2 text-xl font-bold leading-tight text-black">
                                         {productDetails != null && productDetails.name}
@@ -109,26 +186,44 @@ export default function Home({ params }) {
                     <div>
                         <p className=" text-black text-xl font-semibold pt-8 pb-5">Paket Pengiriman</p>
                     </div>
-                    <div className="block rounded-lg p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-1/6 ">
-                        <p class="text-base text-custom-7C7C7C flex ">
-                            Pilih Paket Pengiriman
+                    <div className=" text-black block rounded-lg p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-1/6 ">
+                        <p className="text-lg font-semibold text-start">{paketPengiriman ? `${paketPengiriman}` : `Pilih Paket Pengiriman`} </p>
+                        <p className="text-base text-custom-7C7C7C flex ">
+                            {estimasi ? `${estimasi}` : ``}
                         </p>
                     </div>
                     <div>
-                        <button className=" text-white bg-custom-C2AF00 w-36 h-10 rounded-lg my-5">
+                        <button
+                            onClick={handlePengiriman}
+                            className=" text-white bg-custom-C2AF00 w-36 h-10 rounded-lg my-5">
                             Ubah paket
                         </button>
                     </div>
+                    {isPengirimanVisible && (
+                        <div className="block rounded-lg text-black p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-fit" >
+                            <h1 className="text-black text-xl font-semibold pb-5 text-center">Pilih Paket Pengiriman</h1>
+                            <button onClick={handleClosePengiriman}>
+                                <div className="block rounded-lg text-black p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-fit">
+                                    <p className=" text-lg font-semibold text-start ">Reguler</p>
+                                    <p className=" text-custom-7C7C7C">Estimasi Sampai dalam 1 hari</p>
+                                </div>
+                            </button>
+
+                        </div>
+                    )};
 
                     <div>
                         <p className=" text-black text-xl font-semibold pt-8 pb-5">Total Tagihan</p>
                     </div>
-                    <div className="block rounded-lg bg-custom-E2DDDD p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-1/3">
+                    <div className="block rounded-lg bg-custom-E2DDDD w-fit p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
                         <div className="flex justify-between">
                             <div className="flex">
                                 <div className=" ml-3 my-5 text-lg text-black">
                                     <p class="  font-medium">
                                         Harga Pesanan
+                                    </p>
+                                    <p class="  font-medium">
+                                        Biaya Pengiriman
                                     </p>
                                     <p class="  font-medium">
                                         Biaya Administrasi
@@ -140,6 +235,9 @@ export default function Home({ params }) {
                                 <div className=" ml-48 my-5  text-lg text-black dlex flex-col items-end">
                                     <p class="  font-medium ">
                                         Rp {totalPrice != null && totalPrice.toLocaleString('id-ID')}
+                                    </p>
+                                    <p class="  font-medium ">
+                                        Rp {pengiriman != null && pengiriman.toLocaleString('id-ID')}
                                     </p>
                                     <p class="  font-medium ">
                                         Rp 2.000
@@ -157,9 +255,7 @@ export default function Home({ params }) {
                         </button>
                     </div>
 
-                    <div className=" text-black">
-                        <ProvinceDropdown onSelectProvince={handleSelectProvince} />
-                    </div>
+
                 </div>
             </main>
 
@@ -171,3 +267,5 @@ export default function Home({ params }) {
         </>
     )
 }
+
+
