@@ -61,7 +61,7 @@ export default function Home() {
                 <div class="container mx-auto">
                     <div class="flex items-center justify-between">
                         <a href="landingPage">
-                            <img href="/landingPage" src='img/logosm.png'></img>
+                            <img href="/landingPage" src='img/logosm.png' alt='logo'></img>
                         </a>
                         <div class="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
@@ -74,7 +74,7 @@ export default function Home() {
                 </div>
             </nav>
 
-            <main className=' bg-white h-full py-4'>
+            <main className=' bg-white h-full  min-h-screen py-4'>
                 <div className=" pt-16 px-14 pb-10">
                     <h1 className=" text-black text-4xl font-bold">
                         Pesanan Saya
@@ -84,7 +84,7 @@ export default function Home() {
                     <div className="block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] my-5 w-2/5 mx-14">
                         <div className="flex justify-between">
                             <div className="flex">
-                                <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" src={transaction.productDetails.image}></img>
+                                <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" alt='produk' src={transaction.productDetails.image}></img>
                                 <div className=" ml-10 my-5">
                                     <h5
                                         class="mb-2 text-xl font-bold leading-tight text-black">

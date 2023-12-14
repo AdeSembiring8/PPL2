@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState } from 'react';
 import { redirect, useRouter } from "next/navigation";
 import GoogleButton from 'react-google-button'
@@ -112,7 +113,10 @@ export default function Home() {
   return (
     <main className="flex min-h-smicreen flex-col items-center justify-between bg-[url('/img/bg_login.png')] w-full h-full bg-center bg-cover">
       <div className="flex w-1/3 bg-white self-end h-screen text-black flex-col">
-        <img className=' pt-14 px-14 w-96 h-auto self-center' src='img/logo.png'></img>
+        <div className=' pt-14 px-14 w-96 h-auto self-center'>
+          <Image  src='/img/logo.png' alt='Logo' width={500} height={200}></Image>
+        </div>
+
         <h1 className='font-extrabold text-4xl self-center font-fredoka mt-17'>Selamat Datang!</h1>
 
         <h3 className="self-center text-sm pt-2">Silahkan masuk dengan akun anda</h3>
@@ -143,16 +147,16 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
             <GoogleButton
-                clientId="YOUR_GOOGLE_CLIENT_ID"
-                buttonText="Login with Google"
-                onSuccess={handleLoginWithGoogle}
-                onFailure={handleLoginWithGoogle}
-                cookiePolicy={'single_host_origin'}
-                type="dark"
+              clientId="YOUR_GOOGLE_CLIENT_ID"
+              buttonText="Login with Google"
+              onSuccess={handleLoginWithGoogle}
+              onFailure={handleLoginWithGoogle}
+              cookiePolicy={'single_host_origin'}
+              type="dark"
             />
-        </div>
+          </div>
 
-        {/* <div>
+          {/* <div>
           <button onClick={handleLoginWithGoogle}>
             Login With Google
           </button>

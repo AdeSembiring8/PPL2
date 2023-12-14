@@ -7,7 +7,7 @@ export default function Home() {
             <nav class=" bg-lime-700 px-4">
                 <div class="container mx-auto">
                     <div class="flex items-center justify-between">
-                        <img href="#" src='img/logosm.png'></img>
+                        <Image width={150} height={20} src='/img/logosm.png' ></Image>
                         <div class="space-x-4">
                             <a href="#produkkami" className="text-white">Produk Kami</a>
                             <a href="#tentangkami" className="text-white">Tentang Kami</a>
@@ -37,8 +37,8 @@ export default function Home() {
                             </Link> */}
                         </div>
                     </div>
-                    <div className="w-3/4 ml-auto">
-                        <img src="img/aboutus.png" alt="About Us" className="w-full" />
+                    <div className="w-full ml-auto">
+                        <Image src="/img/aboutus.png" alt="About Us" width={980} height={20}/>
                     </div>
                 </div>
 

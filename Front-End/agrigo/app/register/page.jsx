@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { redirect, useRouter } from "next/navigation";
+import Image from 'next/image';
 
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Your API endpoint
     const apiUrl = 'http://52.221.249.20:8080/api/register';
 
@@ -78,7 +79,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-[url('/img/bg_login.png')] w-full h-screen bg-center bg-cover">
       <div className="flex w-1/3 bg-white self-end h-screen text-black flex-col">
-        <img className='pt-14 px-14 w-96 h-auto self-center' src='img/logo.png' alt="Logo" />
+        <div className='pt-14 px-14 w-96 self-center'>
+          <Image src='/img/logo.png' alt="Logo" width={500} height={100} />
+        </div>
         <h1 className='font-extrabold text-4xl self-center font-fredoka mt-17'>Daftar Akun </h1>
 
         <h3 className="self-center text-sm pt-2">Silahkan isi data berikut untuk mendaftar</h3>
@@ -96,7 +99,7 @@ export default function Home() {
           )}
           <div className="pt-5">
             <label className="" htmlFor="password">Password</label><br />
-            <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="password" id="password" name="password" onChange={(e) => {setPassword(e.target.value);setShowPasswordMismatchPopup(false);}} /> <br />
+            <input className="bg-gray-200 shadow-inner rounded mt-2 p-2 w-full" type="password" id="password" name="password" onChange={(e) => { setPassword(e.target.value); setShowPasswordMismatchPopup(false); }} /> <br />
           </div>
 
           <div className="pt-5">

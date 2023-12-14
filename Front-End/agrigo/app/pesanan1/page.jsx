@@ -77,7 +77,7 @@ export default function Home() {
                                 <p>Category: {product.category}</p>
                                 <p>Price: Rp {product.price}</p>
                                 <p>Unit: {product.unit}</p>
-                                <img src={product.image} alt={product.name} />
+                                <Image src={product.image} alt={product.name} />
                                 {/* Tambahkan informasi detail produk lainnya */}
                             </>
                         ) : (

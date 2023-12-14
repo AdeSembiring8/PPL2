@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import ProvinceDropdown from './ProvinceDropdown';
+import Image from 'next/image';
 
 // export const handleCloseModalAlamat = (setAlamatModalVisible) => {
 //     setAlamatModalVisible(false);
@@ -182,12 +183,12 @@ export default function Home({ params }) {
                 <div className="container mx-auto">
                     <div className="flex items-center justify-between">
                         <a href="landingPage">
-                            <img src='/img/logosm.png'></img>
+                            <img src='/img/logosm.png' alt="logo" ></img>
                         </a>
                         <div className="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <a href="/profil">
-                                {username && <img href="/profil" className=' rounded-full h-11' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`} alt='Avatar'></img>}
+                                {username && <img className=' rounded-full h-11' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`} alt='Avatar'></img>}
                             </a>
                         </div>
                     </div>
@@ -232,7 +233,7 @@ export default function Home({ params }) {
                     <div className="block rounded-lg bg-custom-F2F2F2 p-6 w-fit shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
                         <div className="flex justify-between">
                             <div className="flex">
-                                <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" src={productDetails != null && productDetails.image}></img>
+                                <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" alt="Produk" src={productDetails != null && productDetails.image}></img>
                                 <div className=" ml-40 mr-20 my-5">
                                     <h5
                                         className="mb-2 text-xl font-bold leading-tight text-black">

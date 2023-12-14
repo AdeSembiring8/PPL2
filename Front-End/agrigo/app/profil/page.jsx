@@ -32,21 +32,6 @@ export default function Home() {
         }
     }
 
-    // Fungsi untuk logout menggunakan API
-    // async function logout() {
-    //     try {
-    //         const response = await fetch('http://52.221.249.20:8080/api/logout', {
-    //             method: 'POST', // Atau metode HTTP yang sesuai
-    //         });
-    //         if (response.ok) {
-    //             console.log('Logout berhasil');
-    //         } else {
-    //             console.error('Gagal logout');
-    //         }
-    //     } catch (error) {
-    //         console.error('Terjadi kesalahan', error);
-    //     }
-    // }
 
     function clearLocalStorage() {
         localStorage.clear();
@@ -62,7 +47,7 @@ export default function Home() {
                 <div className="container mx-auto">
                     <div className="flex items-center justify-between">
                         <a href="landingPage">
-                            <img href="/landingPage" src='img/logosm.png'></img>
+                            <img href="/landingPage" src='img/logosm.png' alt='logo'></img>
                         </a>
                         <div className="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
@@ -90,7 +75,7 @@ export default function Home() {
                         <div className="block rounded-lg bg-custom-F2F2F2 p-6 ml-96 mt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-fit ">
                             <div className="">
                                 <div className=" self-center">
-                                    {username && <img className="p-2 aspect-w-1 self-center aspect-h-1 w-80 h-80" href="#" src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`}></img>}
+                                    {username && <img className="p-2 aspect-w-1 self-center aspect-h-1 w-80 h-80" href="#" alt='avatar' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`}></img>}
                                 </div>
                                 <div className=' '>
                                     <button
