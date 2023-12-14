@@ -42,7 +42,7 @@ export default function Home() {
         localStorage.setItem('name', username);
         router.push('/landingPage');
 
-  
+
         // Simpan token dalam localStorage
         if (token) {
           // Simpan token dalam localStorage
@@ -62,10 +62,51 @@ export default function Home() {
     }
   };
 
+  // Contoh menggunakan Google OAuth untuk mendapatkan token
+  // Pastikan untuk menggunakan library OAuth atau mengikuti langkah-langkah yang sesuai untuk mendapatkan token dari Google
+
+  const handleLoginWithGoogle = async (e) => {
+    try {
+      const googleAccessToken = await getGoogleAccessToken(); // Fungsi untuk mendapatkan token dari Google
+      const response = await fetch('http://52.221.249.20:8080/api/login/google', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${googleAccessToken}`, // Gunakan token dari Google untuk autentikasi
+          'Content-Type': 'application/json' // Sesuaikan dengan tipe konten yang diperlukan oleh endpoint
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Login dengan Google berhasil:', data);
+        // Lakukan tindakan lanjutan setelah berhasil login
+      } else {
+        // Penanganan ketika login gagal
+        console.error('Gagal login dengan Google');
+      }
+    } catch (error) {
+      console.error('Terjadi kesalahan', error);
+    }
+  }
+
   // const closePopup = () => {
   //   setInvalidUsernameorPasswordPopup(false);
   // };
 
+  // Fungsi untuk login dengan Google menggunakan API
+
+  // Trigger login with Google saat tombol login ditekan
+  // document.getElementById('loginWithGoogleButton').addEventListener('click', async () => {
+  //   const loginButton = document.getElementById('loginWithGoogleButton');
+  //   if (loginButton) {
+  //     loginButton.addEventListener('click', async () => {
+  //       await loginWithGoogle();
+  //       // Lakukan operasi lain setelah login selesai
+  //     });
+  //   } else {
+  //     console.error('Elemen loginWithGoogleButton tidak ditemukan');
+  //   }
+  // });
 
   return (
     <main className="flex min-h-smicreen flex-col items-center justify-between bg-[url('/img/bg_login.png')] w-full h-screen bg-center bg-cover">
@@ -98,6 +139,9 @@ export default function Home() {
             <button className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold' type='submit'>
               Login
             </button>
+          </div>
+          <div className="mt-10">
+          <button onClick={handleLoginWithGoogle} >Login dengan Google</button>
           </div>
         </form>
         <hr className="mx-10 mt-16 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>

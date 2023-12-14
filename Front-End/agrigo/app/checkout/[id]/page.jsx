@@ -105,6 +105,22 @@ export default function Home({ params }) {
                 console.error('Error fetching product details:', error);
             }
         }
+        const handleClosePengiriman = () => {
+            const newPengiriman = 10000;
+            const paketPengiriman = "Reguler";
+            const estimasi = "Estimasi Sampai dalam 1 hari";
+            setPaketPengriman(paketPengiriman);
+            setEstimasi(estimasi);
+            setPengiriman(newPengiriman);
+            setPengirimanVisible(false);
+    
+    
+            localStorage.setItem('shipping :', paketPengiriman);
+            localStorage.setItem('quantity :', qty);
+            localStorage.setItem('total :', totalPrice);
+            localStorage.setItem('adminFee :', 10000);
+            localStorage.setItem('shippingFee :', 10000);
+        }
         // const calculateTotalFinal = () => {
         //     let totalFinal;
         //     if (pengiriman > 0) {
@@ -123,19 +139,30 @@ export default function Home({ params }) {
     const handleCheckout = async (e) => {
         e.preventDefault()
         const dataToSend = {
-            userId: localStorage.getItem('name'),
-            productId: localStorage.getItem('productId'),
-            address: localStorage.getItem('alamt:'),
-            shipping: localStorage.getItem('shipping:'),
-            quantity: localStorage.getItem('quantity:'),
+            // userId: localStorage.getItem('name'),
+            // productId: localStorage.getItem('productId'),
+            // address: localStorage.getItem('alamt:'),
+            // shipping: localStorage.getItem('shipping:'),
+            // quantity: localStorage.getItem('quantity:'),
+            // total: totalPrice,
+            // shippingFee: 10000,
+            userId: username,
+            productId: productId,
+            address: address,
+            shipping: paketPengiriman,
+            quantity: parseInt(qty),
             total: totalPrice,
             shippingFee: 10000,
+            adminFee: 10000
+
         };
+        console.log("DATA", dataToSend)
         fetch('http://52.221.249.20:8080/api/checkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+
             body: JSON.stringify(dataToSend)
         })
             .then(response => {
@@ -289,7 +316,7 @@ export default function Home({ params }) {
                                         Rp {pengiriman != null && pengiriman.toLocaleString('id-ID')}
                                     </p>
                                     <p class="  font-medium ">
-                                        Rp 2.000
+                                        Rp 10.000
                                     </p>
                                     <p class=" text-lg mt-11 text-black font-bold ">
                                         Rp {totalFinal != null && totalFinal.toLocaleString('id-ID')}
