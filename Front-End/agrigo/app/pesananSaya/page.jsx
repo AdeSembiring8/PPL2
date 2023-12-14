@@ -57,13 +57,13 @@ export default function Home() {
 
     return (
         <>
-            <nav class=" bg-lime-700 px-4">
-                <div class="container mx-auto">
-                    <div class="flex items-center justify-between">
+            <nav className=" bg-lime-700 px-4">
+                <div className ="container mx-auto">
+                    <div className="flex items-center justify-between">
                         <a href="landingPage">
                             <img href="/landingPage" src='img/logosm.png' alt='logo'></img>
                         </a>
-                        <div class="flex space-x-4 items-center">
+                        <div className="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <a href="/profil">
                                 {username && <img href="/profil"
@@ -87,21 +87,21 @@ export default function Home() {
                                 <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" alt='produk' src={transaction.productDetails.image}></img>
                                 <div className=" ml-10 my-5">
                                     <h5
-                                        class="mb-2 text-xl font-bold leading-tight text-black">
+                                        className="mb-2 text-xl font-bold leading-tight text-black">
                                         {transaction.productDetails.name}
                                     </h5>
-                                    <p class="mb-4 text-base text-slate-500 font-medium ">
+                                    <p className="mb-4 text-base text-slate-500 font-medium ">
                                         {transaction.productDetails.category}
                                     </p>
-                                    <p class="  text-black text-sm">
+                                    <p className="  text-black text-sm">
                                         {transaction.quantity} {transaction.productDetails.unit}
                                     </p>
-                                    <p class=" text-lg text-black font-medium">
+                                    <p className=" text-lg text-black font-medium">
                                         Total: Rp {(transaction.quantity * transaction.productDetails.price) + transaction.adminFee + transaction.shippingFee}
                                     </p>
                                 </div>
                                 <div className=' pt-20 pl-48'>
-                                    <p class="text-black font-medium mb-2">
+                                    <p className="text-black font-medium mb-2">
                                         Status :
                                     </p>
                                     <button className=' bg-custom-E3B100 w-44 h-7 rounded-lg'>

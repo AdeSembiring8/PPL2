@@ -204,7 +204,7 @@ export default function Home({ params }) {
                     </div>
                     <div className="block rounded-lg text-black p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-custom-F2F2F2 w-2/5 ">
                         <p
-                            class="text-base text-custom-7C7C7C flex ">
+                            className="text-base text-custom-7C7C7C flex ">
                             {valueAlamat ? `${valueAlamat}, Provinsi ` : `Masukkan Alamat`}
                             {selectedProvince ? `${selectedProvince}` : ``}
                             {selectedRegencyId ? `, ${selectedRegencyId}` : ``}
@@ -289,30 +289,30 @@ export default function Home({ params }) {
                         <div className="flex justify-between">
                             <div className="flex">
                                 <div className=" ml-3 my-5 text-lg text-black">
-                                    <p class="  font-medium">
+                                    <p className="  font-medium">
                                         Harga Pesanan
                                     </p>
-                                    <p class="  font-medium">
+                                    <p className="  font-medium">
                                         Biaya Pengiriman
                                     </p>
-                                    <p class="  font-medium">
+                                    <p className="  font-medium">
                                         Biaya Administrasi
                                     </p>
-                                    <p class=" text-lg mt-11 text-black font-bold">
+                                    <p className=" text-lg mt-11 text-black font-bold">
                                         Total Biaya:
                                     </p>
                                 </div>
                                 <div className=" ml-48 my-5  text-lg text-black dlex flex-col items-end">
-                                    <p class="  font-medium ">
+                                    <p className="  font-medium ">
                                         Rp {totalPrice != null && totalPrice.toLocaleString('id-ID')}
                                     </p>
-                                    <p class="  font-medium ">
+                                    <p className="  font-medium ">
                                         Rp {pengiriman != null && pengiriman.toLocaleString('id-ID')}
                                     </p>
-                                    <p class="  font-medium ">
+                                    <p className="  font-medium ">
                                         Rp 10.000
                                     </p>
-                                    <p class=" text-lg mt-11 text-black font-bold ">
+                                    <p className=" text-lg mt-11 text-black font-bold ">
                                         Rp {totalFinal != null && totalFinal.toLocaleString('id-ID')}
                                     </p>
                                 </div>
