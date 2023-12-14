@@ -81,7 +81,7 @@ export default function Home() {
                     </h1>
                 </div>
                 {transactions.map((transaction, index) => (
-                    <div className="block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] my-5 w-2/5 mx-14">
+                    <div key={index} className="block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] my-5 w-2/5 mx-14">
                         <div className="flex justify-between">
                             <div className="flex">
                                 <img className="p-2 aspect-w-1 aspect-h-1 w-40 h-40" href="#" alt='produk' src={transaction.productDetails.image}></img>
