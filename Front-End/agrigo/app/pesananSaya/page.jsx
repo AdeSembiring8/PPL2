@@ -1,6 +1,18 @@
+"use client"
 import Image from 'next/image'
+import { useState, useEffect } from 'react';
+
+
 
 export default function Home() {
+    const [username, setUsername] = useState('');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const username = localStorage.getItem('name');
+            console.log(username);
+            setUsername(username);
+        }
+    }, []);
     return (
         <>
             <nav class=" bg-lime-700 px-4">
@@ -12,7 +24,8 @@ export default function Home() {
                         <div class="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <a href="/profil">
-                                <img href="/profil" src='img/iconUser.png'></img>
+                                {username && <img href="/profil"
+                                    className=' rounded-full h-11' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`} alt='Avatar'></img>}
                             </a>
                         </div>
                     </div>

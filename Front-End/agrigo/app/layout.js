@@ -11,6 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script type="text/javascript"
+          src="https://app.sandbox.midtrans.com/snap/snap.js"
+          data-client-key="SB-Mid-client-jcfTOGOs8NhIm877"></script>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )

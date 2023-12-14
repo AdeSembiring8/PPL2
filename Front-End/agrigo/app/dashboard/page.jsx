@@ -11,6 +11,7 @@ export default function Page() {
   const [isCheckoutModalVisible, setCheckoutModalVisible] = useState(false);
   const [selectedProductQuantity, setSelectedProductQuantity] = useState({});
   const [productDetails, setProductDetails] = useState(null);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +20,11 @@ export default function Page() {
         if (response.ok) {
           const data = await response.json();
           setProducts(data.data);
+          if (typeof window !== 'undefined') {
+            const username = localStorage.getItem('name');
+            console.log(username);
+            setUsername(username);
+          };
         } else {
           console.error('Error fetching data:', response.status, response.statusText);
         }
@@ -110,7 +116,8 @@ export default function Page() {
             <div className="flex space-x-4 items-center">
               <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
               <a href="/profil">
-                <img href="/profil" src='img/iconUser.png'></img>
+                {username && <img href="/profil"
+                  className=' rounded-full h-11' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`} alt='Avatar'></img>}
               </a>
             </div>
           </div>

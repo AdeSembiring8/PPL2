@@ -1,63 +1,50 @@
 "use client"
 import Image from 'next/image'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-    const [name, setName] = useState('');
-    const [avatarUrl, setAvatarUrl] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isInputVisible, setInputVisible] = useState(false);
+    const [username, setUsername] = useState('');
+    // const [avatarUrl, setAvatarUrl] = useState('');
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [isInputVisible, setInputVisible] = useState(false);
 
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
 
-    const handleGenerateAvatar = async () => {
-        setIsLoading(true);
-        try {
-            const response = await fetch(`http://52.221.249.20:8080/api/generateAvatar?name=${name}`);
-            if (response.ok) {
-                const data = await response.blob();
-                const imgUrl = URL.createObjectURL(data);
-                setAvatarUrl(imgUrl);
+    // const handleGenerateAvatar = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         const response = await fetch(`http://52.221.249.20:8080/api/generateAvatar?name=${name}`);
+    //         if (response.ok) {
+    //             const data = await response.blob();
+    //             const imgUrl = URL.createObjectURL(data);
+    //             setAvatarUrl(imgUrl);
 
-                // Simpan URL gambar ke dalam localStorage
-                localStorage.setItem('avatarUrl', JSON.stringify(imgUrl));
-            } else {
-                console.error('Failed to fetch avatar:', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('Error generating avatar:', error);
-        } finally {
-            setIsLoading(false);
-        }
-        setInputVisible(false);
-    };
+    //             // Simpan URL gambar ke dalam localStorage
+    //             localStorage.setItem('avatarUrl', JSON.stringify(imgUrl));
+    //         } else {
+    //             console.error('Failed to fetch avatar:', response.status, response.statusText);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error generating avatar:', error);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    //     setInputVisible(false);
+    // };
 
-    const handleBuatAvatar = () => {
-        setInputVisible(true);
-    }
+    // const handleBuatAvatar = () => {
+    //     setInputVisible(true);
+    // }
 
     useEffect(() => {
-        const fetchAvatar = async () => {
-          setIsLoading(true);
-          try {
-            const response = await fetch('http://52.221.249.20:8080/api/getAvatar');
-            if (response.ok) {
-              const data = await response.json();
-              setAvatarUrl(data.avatarUrl);
-            } else {
-              console.error('Failed to fetch avatar:', response.status, response.statusText);
-            }
-          } catch (error) {
-            console.error('Error fetching avatar:', error);
-          } finally {
-            setIsLoading(false);
-          }
-        };
-    
-        fetchAvatar();
-      }, []);
+        if (typeof window !== 'undefined') {
+            const username = localStorage.getItem('name');
+            setUsername(username);
+        }
+    }, []);
+
     return (
         <>
             <nav className=" bg-lime-700 px-4">
@@ -69,7 +56,8 @@ export default function Home() {
                         <div className="flex space-x-4 items-center">
                             <a href="/pesananSaya" className="text-white">Pesanan Saya</a>
                             <a href="/profil">
-                                {avatarUrl && <img href="/profil" src={avatarUrl} alt='Avatar'></img>}
+                                {username && <img href="/profil"
+                                className=' rounded-full h-11' src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`} alt='Avatar'></img>}
                             </a>
                         </div>
                     </div>
@@ -91,11 +79,11 @@ export default function Home() {
                         <div className="block rounded-lg bg-custom-F2F2F2 p-6 ml-96 mt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-fit ">
                             <div className="">
                                 <div className=" self-center">
-                                    {avatarUrl && <img className="p-2 aspect-w-1 self-center aspect-h-1 w-80 h-80" href="#" src={avatarUrl}></img>}
+                                    {username && <img className="p-2 aspect-w-1 self-center aspect-h-1 w-80 h-80" href="#" src={`http://52.221.249.20:8080/api/generateAvatar?name=${username}`}></img>}
                                 </div>
                                 <div className=' '>
                                     <button
-                                        onClick={handleBuatAvatar}
+                                        // onClick={handleBuatAvatar}
                                         className="text-white bg-custom-C2AF00 w-80 h-10 rounded-lg my-5 font-bold self-center">
                                         Buat Avatar
                                     </button>
@@ -112,7 +100,7 @@ export default function Home() {
 
                     <div className=' ml-40 pr-48 mr-48 w-full'>
 
-                        {
+                        {/* {
                             isInputVisible && (
                                 <div>
                                     <div>
@@ -128,7 +116,7 @@ export default function Home() {
                                 </div>
 
                             )
-                        }
+                        } */}
 
                         {/* <div className="pt-5">
                             <label className="text-black text-xl font-bold" for="password">Password</label><br />

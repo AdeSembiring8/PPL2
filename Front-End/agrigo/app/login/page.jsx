@@ -39,6 +39,7 @@ export default function Home() {
         const data = await response.json();
         const token = data.data.token;
         console.log('Response Data:', data);
+        localStorage.setItem('name', username);
         router.push('/landingPage');
 
   
