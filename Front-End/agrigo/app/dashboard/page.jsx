@@ -2,8 +2,6 @@
 // import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import React from 'react';
-// import { useRouter } from 'next/router';
-// import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 
 export default function Page() {
   const [products, setProducts] = useState([]);
@@ -36,13 +34,6 @@ export default function Page() {
     fetchData();
   }, [setProducts]);
 
-  // const handleAddToCart = (product) => {
-  //   setSelectedProducts([...selectedProducts, product]);
-  //   setSelectedProductQuantity({
-  //     ...selectedProductQuantity,
-  //     [product._id]: 1, // Set the default quantity to 1
-  //   });
-  // };
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -51,20 +42,17 @@ export default function Page() {
       const response = await fetch(`http://52.221.249.20:8080/api/products?search=${searchTerm}`);
       const data = await response.json();
 
-      // Perbarui state dengan hasil pencarian
       setSearchResults(data.data);
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
   };
 
-  //membuat tampilan Modal
-  // Fungsi untuk menutup modal checkout
   const handleCloseCheckoutModal = () => {
     setCheckoutModalVisible(false);
   };
 
-  const productNames = products.map(product => product.name);
+  // const productNames = products.map(product => product.name);
 
 
   // Fungsi untuk mengambil detail produk berdasarkan ID
@@ -99,12 +87,7 @@ export default function Page() {
     return productDetails;
   };
 
-  // const handleQuantityChange = (productId, newQuantity) => {
-  //   setSelectedProductQuantity({
-  //     ...selectedProductQuantity,
-  //     [productId]: newQuantity,
-  //   });
-  // };
+
   return (
     <>
       <nav className=" bg-lime-700 px-4">

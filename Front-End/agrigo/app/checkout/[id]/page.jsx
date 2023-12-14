@@ -50,7 +50,7 @@ export default function Home({ params }) {
         localStorage.setItem('shipping :', paketPengiriman);
         localStorage.setItem('quantity :', qty);
         localStorage.setItem('total :', totalPrice);
-        localStorage.setItem('adminFee :', 2000);
+        localStorage.setItem('adminFee :', 10000);
         localStorage.setItem('shippingFee :', 10000);
     }
     const handleUbahAlamat = () => {
@@ -87,11 +87,11 @@ export default function Home({ params }) {
                     const totalPrice = price * qty;
                     setTotalPrice(totalPrice);
 
-                    const totalFinal = totalPrice + 2000;
+                    const totalFinal = totalPrice + 10000;
                     setTotalFinal(totalFinal);
                     // Memanggil fungsi perhitungan saat nilai pengiriman berubah
                     if (pengiriman !== null) {
-                        const totalFinal = totalPrice + 12000;
+                        const totalFinal = totalPrice + 20000;
                         setTotalFinal(totalFinal);
                     };
                     if (typeof window !== 'undefined') {
@@ -113,8 +113,8 @@ export default function Home({ params }) {
             setEstimasi(estimasi);
             setPengiriman(newPengiriman);
             setPengirimanVisible(false);
-    
-    
+
+
             localStorage.setItem('shipping :', paketPengiriman);
             localStorage.setItem('quantity :', qty);
             localStorage.setItem('total :', totalPrice);
