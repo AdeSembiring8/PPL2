@@ -133,19 +133,12 @@ export default function Home({ params }) {
         // };
 
         test();
-    }, [pengiriman]);
+    }, [pengiriman,params.id, qty, totalPrice]);
 
 
     const handleCheckout = async (e) => {
         e.preventDefault()
         const dataToSend = {
-            // userId: localStorage.getItem('name'),
-            // productId: localStorage.getItem('productId'),
-            // address: localStorage.getItem('alamt:'),
-            // shipping: localStorage.getItem('shipping:'),
-            // quantity: localStorage.getItem('quantity:'),
-            // total: totalPrice,
-            // shippingFee: 10000,
             userId: username,
             productId: productId,
             address: address,
