@@ -13,7 +13,7 @@ import (
 var baseUrl string = "http://52.221.249.20:8080"
 
 func TestGetProducts(t *testing.T){
-	url := baseUrl+"/api/products/656e0c412bdae0ba3854fc44"
+	url := baseUrl+"/api/products"
 
 	response, err := http.Get(url)
 	if err != nil {
@@ -186,8 +186,8 @@ func TestRegisterAlreadyTaken(t *testing.T){
 func TestLoginSuccess(t *testing.T){
 	url := baseUrl + "/api/login"
 
-	username := "royalgen"
-	password := "kamalganteng"
+	username := "tes"
+	password := "123"
 	requestBody := map[string]interface{}{
 		"username" : username,
 		"password" : password,
@@ -225,7 +225,7 @@ func TestLoginSuccess(t *testing.T){
 	}
 
 	if message == "Success" {
-		t.Log("API test success!")
+		t.Log("API test passed!")
 	}else {
 		t.Error("API test failed.\nresponse:",message,"\nexpected: Success")
 	}
@@ -273,7 +273,7 @@ func TestLoginInvalid(t *testing.T){
 	}
 
 	if message == "Invalid username or password" {
-		t.Log("API test success!")
+		t.Log("API test passed!")
 	}else {
 		t.Error("API test failed.\nresponse:",message,"\nexpected: Invalid username or password")
 	}
@@ -308,7 +308,7 @@ func TestLogoutSuccess(t *testing.T){
 	}
 
 	if message == "Success" {
-		t.Log("API test success!")
+		t.Log("API test passed!")
 	}else {
 		t.Error("API test failed.\nresponse:",message,"\nexpected: Success")
 	}
@@ -531,7 +531,7 @@ func TestTransactionByUser(t *testing.T){
 }
 
 func TestCheckout(t *testing.T){
-	url := baseUrl + "/api/login"
+	url := baseUrl + "/api/checkout"
 
 	requestBody := map[string]interface{}{
 		"userId": "656e0c412bdae0ba3854fc44",
@@ -576,7 +576,7 @@ func TestCheckout(t *testing.T){
 	}
 
 	if message == "Success" {
-		t.Log("API test success!")
+		t.Log("API test passed!")
 	}else {
 		t.Error("API test failed.\nresponse:",message,"\nexpected: Success")
 	}

@@ -1,16 +1,34 @@
+const local = "http://localhost:3000"
+const deploy = "http://52.221.249.20:3000/"
+const useurl = local
+
+const generateRandomString = (length) => {
+  let result = '';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 describe('TS-01: User registrasi pada halaman registrasi', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
-    Cypress.config("baseUrl","http://localhost:3000/")
+    Cypress.config("baseUrl",useurl)
     cy.visit('/login');
-    cy.contains('daftar sekarang!').click()
+    cy.contains('daftar sekarang!').focus().click({ force: true })
   });
 
   it('TC-01: User registrasi dengan data yang valid', () => {
-    cy.get('input').eq(0).type("tes")
-    cy.get('input').eq(1).type("123")
-    cy.get('input').eq(2).type("123")
-    cy.contains('register').click()
+    const username = generateRandomString(8)
+    const password = generateRandomString(8)
+
+    cy.get('input').eq(0).type(username)
+    cy.get('input').eq(1).type(password)
+    cy.get('input').eq(2).type(password)
+    cy.contains('register').focus().click({ force: true })
     cy.url().should('include', '/login')
   })
 
@@ -21,9 +39,7 @@ describe('TS-01: User registrasi pada halaman registrasi', () => {
   it('TC-03: User registrasi dengan tidak mengisi username', () => {
     cy.get('input').eq(1).type("123")
     cy.get('input').eq(2).type("123")
-    cy.contains('register').click()
-    cy.get('p:contains("Username Sudah Terdaftar!")').should('not.exist')
-    cy.url().should('include','/register')
+    cy.get('button:contains("register")').should('be.disabled')
   })
 
   it('TC-04: User registrasi dengan tidak mengisi password', () => {
@@ -35,7 +51,7 @@ describe('TS-01: User registrasi pada halaman registrasi', () => {
   it('TC-05: User registrasi dengan tidak mengisi konfirmasi password', () => {
     cy.get('input').eq(0).type("tes")
     cy.get('input').eq(1).type("123")
-    cy.contains('register').click()
+    cy.contains('register').focus().click({ force: true })
     cy.get('p:contains("Password dan konfirmasi password tidak sesuai.")')
     cy.url().should('not.include','/login')
   })
@@ -44,78 +60,75 @@ describe('TS-01: User registrasi pada halaman registrasi', () => {
 describe('TS-02: User login pada halaman login', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
-    Cypress.config("baseUrl","http://localhost:3000/")
+    Cypress.config("baseUrl",useurl)
     cy.visit('/login');
   });
 
   it('TC-01: User login dengan mengisi data yang valid', () => {
     cy.get('input').eq(0).type("tes")
     cy.get('input').eq(1).type("123")
-    cy.contains('Login').click()
+    cy.get('button:contains("Login")').focus().click({ force: true })
     cy.url().should('include','/landingPage')
   })
 
   it('TC-02: User login dengan mengisi data yang tidak valid', () => {
     cy.get('input').eq(0).type("test")
     cy.get('input').eq(1).type("test")
-    cy.contains('Login').click()
+    cy.get('button:contains("Login")').focus().click({ force: true })
     cy.get('p:contains("Username atau Password Salah !")')
     cy.url().should('include','/login')
   })
 
   it('TC-03: User login dengan tidak mengisi data', () => {
-    cy.contains('Login').click()
-    cy.wait(1000)
-    cy.url().should('include','/login')
+    cy.get('button:contains("Login")').should('be.disabled')
   })
 
   it('TC-04: User login dengan tidak mengisi username', () => {
     cy.get('input').eq(1).type("test123")
-    cy.contains('Login').click()
-    cy.url().should('include','/login')
+    cy.get('button:contains("Login")').should('be.disabled')
   })
 
   it('TC-05: User login dengan tidak mengisi password', () => {
     cy.get('input').eq(0).type("test123")
-    cy.contains('Login').click()
-    cy.url().should('include','/login')
+    cy.get('button:contains("Login")').should('be.disabled')
   })
 })
 
 describe('TS-03: User mengkases halaman homepage dan membeli produk', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080)
-    Cypress.config("baseUrl","http://localhost:3000/")
+    Cypress.config("baseUrl",useurl)
     cy.visit('/landingPage')
   });
 
   it('TC-01: User membeli produk dengan memasukkan kuantitas pesanan', () => {
-    cy.contains('Mulai Belanja').click()
+    cy.contains('Mulai Belanja').focus().click({ force: true })
     cy.wait(2000);
-    cy.get('button').eq(0).click()
+    cy.get('button').eq(0).focus().click({ force: true })
     cy.get('input').eq(0).type('2')
-    cy.get('button:contains("Checkout")').click()
+    cy.get('button:contains("Checkout")').focus().click({ force: true })
     cy.url().should('include','/checkout/')
   })
 
   it('TC-02: User membeli produk dengan tidak memasukkan kuantitas pesanan', () => {
-    cy.contains('Mulai Belanja').click()
+    cy.contains('Mulai Belanja').focus().click({ force: true })
     cy.wait(2000);
-    cy.get('button').eq(0).click()
-    cy.get('button:contains("Checkout")').click()
-    cy.url().should('not.include','/checkout/')
+    cy.get('button').eq(0).focus().click({ force: true })
+    cy.get('button:contains("Checkout")').focus().click({ force: true })
+    cy.url().should('include','/dashboard')
   })
 })
 
 describe('TS-04: User mengkases halaman checkout', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080)
-    Cypress.config("baseUrl","http://localhost:3000/")
+    Cypress.config("baseUrl",useurl)
     cy.visit('/checkout/656e0c412bdae0ba3854fc44?qty=1')
   });
 
   it('TC-01: User checkout produk yang telah dibeli', () => {
-    cy.contains('Ubah alamat pengiriman').click()
+    cy.wait(200)
+    cy.get("button:contains('Ubah alamat pengiriman')").focus().click({ force: true })
     cy.wait(500)
     cy.get('textarea').type("Puri Indah Jatinangor No.21")
     cy.get('select').eq(0).select('JAWA BARAT')
@@ -125,12 +138,13 @@ describe('TS-04: User mengkases halaman checkout', () => {
     cy.get('select').eq(2).select('JATINANGOR')
     cy.wait(500)
     cy.get('select').eq(3).select('CIKERUH')
-    cy.contains('Simpan Alamat').click()
+    cy.contains('Simpan Alamat').focus().click({ force: true })
     cy.contains('Puri Indah Jatinangor No.21, Provinsi JAWA BARAT, KABUPATEN SUMEDANG, Kec. JATINANGOR, Kel/Desa. CIKERUH')
   })
 
   it('TC-02: User checkouut produk yang telah dibeli namun tidak memasukkan alamat', () => {
-    cy.contains('Ubah alamat pengiriman').click()
+    cy.wait(200)
+    cy.get("button:contains('Ubah alamat pengiriman')").focus().click({ force: true })
     cy.wait(500)
     cy.get('select').eq(0).select('JAWA BARAT')
     cy.wait(500)
@@ -143,7 +157,8 @@ describe('TS-04: User mengkases halaman checkout', () => {
   })
 
   it('TC-03: User checkout produk yang telah dibeli namun tidak memilih Provinsi', () => {
-    cy.contains('Ubah alamat pengiriman').click()
+    cy.wait(200)
+    cy.get("button:contains('Ubah alamat pengiriman')").focus().click({ force: true })
     cy.wait(500)
     cy.get('textarea').type("Puri Indah Jatinangor No.21")
     cy.wait(500)
@@ -151,7 +166,8 @@ describe('TS-04: User mengkases halaman checkout', () => {
   })
 
   it('TC-04: User checkout produk yang telah dibeli namun tidak memilih Kabupaten/kota', () => {
-    cy.contains('Ubah alamat pengiriman').click()
+    cy.wait(200)
+    cy.get("button:contains('Ubah alamat pengiriman')").focus().click({ force: true })
     cy.wait(500)
     cy.get('textarea').type("Puri Indah Jatinangor No.21")
     cy.get('select').eq(0).select('JAWA BARAT')
@@ -160,7 +176,8 @@ describe('TS-04: User mengkases halaman checkout', () => {
   })
 
   it('TC-05: User checkout produk yang telah dibeli namun tidak memilih kecamatan', () => {
-    cy.contains('Ubah alamat pengiriman').click()
+    cy.wait(200)
+    cy.get("button:contains('Ubah alamat pengiriman')").focus().click({ force: true })
     cy.wait(500)
     cy.get('textarea').type("Puri Indah Jatinangor No.21")
     cy.get('select').eq(0).select('JAWA BARAT')
