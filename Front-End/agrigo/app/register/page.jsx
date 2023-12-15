@@ -32,7 +32,7 @@ export default function Home() {
     };
 
     // Check if the password is not empty
-    if (!password) {
+    if (!password || !username) {
       console.error('Password is required');
       return;
     }
@@ -114,7 +114,7 @@ export default function Home() {
           <a href="/login">
             <div className="mt-10">
               <button className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold' type='submit'
-                disabled={!password}>
+                disabled={!password || !username}>
                 register
               </button>
             </div>

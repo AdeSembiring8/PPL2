@@ -36,6 +36,10 @@ export default function Home() {
         body: JSON.stringify(requestBody),
       });
 
+      if (!password || !username) {
+        console.error('Password is required');
+        return;
+      }
       if (response.ok) {
         console.log('Login Successful');
         const data = await response.json();
@@ -114,7 +118,7 @@ export default function Home() {
     <main className="flex min-h-smicreen flex-col items-center justify-between bg-[url('/img/bg_login.png')] w-full h-full bg-center bg-cover">
       <div className="flex w-1/3 bg-white self-end h-screen text-black flex-col">
         <div className=' pt-14 px-14 w-96 h-auto self-center'>
-          <Image  src='/img/logo.png' alt='Logo' width={500} height={200}></Image>
+          <Image src='/img/logo.png' alt='Logo' width={500} height={200}></Image>
         </div>
 
         <h1 className='font-extrabold text-4xl self-center font-fredoka mt-17'>Selamat Datang!</h1>
@@ -141,7 +145,8 @@ export default function Home() {
             </div>
           )}
           <div className="mt-10">
-            <button className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold' type='submit'>
+            <button disabled={!password || !username}
+              className='bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-3 w-full rounded font-bold' type='submit'>
               Login
             </button>
           </div>

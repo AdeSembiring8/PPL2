@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
+import { redirect, useRouter } from "next/navigation";
 import React from 'react';
 
 export default function Page() {
@@ -10,6 +11,7 @@ export default function Page() {
   const [selectedProductQuantity, setSelectedProductQuantity] = useState({});
   const [productDetails, setProductDetails] = useState(null);
   const [username, setUsername] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,6 +87,14 @@ export default function Page() {
     // Tampilkan modal checkout
     setCheckoutModalVisible(true);
     return productDetails;
+  };
+
+  const handleCheckout = () => {
+    if (!selectedProductQuantity) {
+      console.log('Tidak dapat checkout karena selectedProductQuantity tidak ada.');
+    } else if (selectedProductQuantity>0) {
+      router.push(`/checkout/${productDetails._id}?qty=${selectedProductQuantity}`);
+    }
   };
 
 
@@ -204,12 +214,18 @@ export default function Page() {
                         <p className='mt-3 mb-0 text-start text-lg font-medium mr-2 w-fit'>{productDetails.unit} </p>
                       </div>
                       <div>
-                        <a href={`/checkout/${productDetails._id}?qty=${selectedProductQuantity}`}>
+                        {/* <a href={`/checkout/${productDetails._id}?qty=${selectedProductQuantity}`}>
                           <button className=' text-white text-lg bg-custom-92B150 w-36 self-end h-10 rounded-lg my-5 ml-36' >
                             Checkout
                           </button>
-
-                        </a>
+                        </a> */}
+                        <button
+                          className='text-white text-lg bg-custom-92B150 w-36 self-end h-10 rounded-lg my-5 ml-36'
+                          onClick={handleCheckout}
+                          disabled={!selectedProductQuantity}
+                        >
+                          Checkout
+                        </button>
                       </div>
                       <button className=' bg-red-500 w-36 h-10 rounded-lg my-5 text-lg text-white ml-2'
                         onClick={() => handleCloseCheckoutModal()}>cancel</button>
@@ -224,8 +240,8 @@ export default function Page() {
           )}
 
 
-          <div className="col-span-1 pl-12 pt-4">
-            {/* Card untuk kategori dan pencarian */}
+          {/* <div className="col-span-1 pl-12 pt-4">
+            {/* Card untuk kategori dan pencarian *
             <div className="card block rounded-lg bg-custom-F2F2F2 p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] w-full">
               <h2 className="text-xl font-bold mb-2 text-stone-950 ">Cari Produk</h2>
               <form className='flex' onSubmit={handleSearch}>
@@ -245,9 +261,9 @@ export default function Page() {
                 <p>Sayur-sayuran</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-      </main>
+      </main> 
 
 
 

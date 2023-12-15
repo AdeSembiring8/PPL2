@@ -215,6 +215,11 @@ const ProvinceDropdown = ({ onSelectProvince, oneCloseModalAlamat }) => {
 
     const handleCloseModal = () => {
         oneCloseModalAlamat(valueAlamat);
+        if(!selectedVillageName || valueAlamat){
+            console.error('disable');
+            return;
+        }
+
     }
 
     console.log(valueAlamat);
@@ -306,6 +311,7 @@ const ProvinceDropdown = ({ onSelectProvince, oneCloseModalAlamat }) => {
                 </div>
             </div>
             <button
+            disabled={!selectedVillageName || !valueAlamat}
                 onClick={handleCloseModal}
                 className=" text-white bg-custom-92B150 w-fit p-2 rounded-lg my-5">
                 Simpan Alamat
