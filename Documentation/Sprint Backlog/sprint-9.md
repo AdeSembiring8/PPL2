@@ -22,7 +22,7 @@
   - [x] Membuat Desain Payment Gateway
   - [X] Menambahkan dan menyesuaikan kembali alur prototype
 - Attila: 
-  - [x] 
+  - [x] Melakukan End to End Testing dan mengisi hasil di Test Case
 #### Delivered:	 4 SP
 ### During Sprint
 20-11-2023:
