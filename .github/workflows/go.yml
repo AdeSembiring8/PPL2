@@ -1,12 +1,11 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
-name: Run main_test
+name: Go Test
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to the branch you want to trigger the workflow on
 
 jobs:
   test:
@@ -19,8 +18,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.20
+        go-version: 1.20  # Change this to your desired Go version
 
-    - name: Run main_test.go
+    - name: Run tests
       run: go test -v ./Back-End/main_test.go
-
