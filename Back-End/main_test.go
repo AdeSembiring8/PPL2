@@ -93,7 +93,7 @@ func TestRegisterSuccess(t *testing.T){
 	url:= baseUrl+"/api/register"
 	
 	// variables for testing
-	username := "testing" + strconv.Itoa(rand.Intn(101)) // Generate random username for testings
+	username := "testing" + strconv.Itoa(rand.Intn(1501)) // Generate random username for testings
 	password := "medan04"	
 	requestBody := map[string]interface{}{
 		"username": username,
