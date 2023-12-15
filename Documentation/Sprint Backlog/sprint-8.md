@@ -22,7 +22,7 @@
   - [x] Mengubah kembali desain Checkout page
   - [X] Memperbaiki alur prototype
 - Attila: 
-  - [x] 
+  - [x] Melakukan unit testing pada endpoint API
 #### Delivered:	 4 SP
 ### During Sprint
 13-11-2023:
