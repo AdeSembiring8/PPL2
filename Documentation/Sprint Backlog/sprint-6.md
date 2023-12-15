@@ -22,7 +22,7 @@
   - [x] Memperbaiki Design Login page, Checkout page, dan Pesanan saya page
   - [X] Memperbaiki alur prototype
 - Attila: 
-  - [x] 
+  - [x] Membuat Test Case End to End Testing
 #### Delivered:	 4 SP
 ### During Sprint
 23-10-2023:
