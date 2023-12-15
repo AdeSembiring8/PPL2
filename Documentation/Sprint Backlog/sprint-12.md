@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Deploy dan perbaikan Bug
 - Andaru: 
   - [x] Membuat Desain Edit Profile page
   - [X] Menambahkan dan menyesuaikan kembali alur prototype

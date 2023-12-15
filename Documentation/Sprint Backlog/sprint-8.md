@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Membuat Landing Page
 - Andaru: 
   - [x] Mengubah kembali desain Checkout page
   - [X] Memperbaiki alur prototype

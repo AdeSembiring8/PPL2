@@ -17,7 +17,7 @@
 - Kamal :
   - [x]
 - Ade   : 
-  - [x]
+  - [x] Membuat Login Page
 - Andaru: 
   - [x] Membuat Design Login page, Checkout page, dan Pesanan saya page
   - [X] Membuat prototype

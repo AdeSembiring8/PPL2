@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Membuat Profil untuk Avatar
 - Andaru: 
   - [x] Membuat Desain Edit Profile Page
   - [X] Menambahkan dan menyesuaikan kembali alur prototype

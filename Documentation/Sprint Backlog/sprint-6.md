@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Membuat Page Pesanan Saya 
 - Andaru: 
   - [x] Memperbaiki Design Login page, Checkout page, dan Pesanan saya page
   - [X] Memperbaiki alur prototype

@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Membuat Integrasi BE FE untuk Mengambil data dari database ke dashboard
 - Andaru: 
   - [x] Membuat Desain Payment Gateway
   - [X] Menambahkan dan menyesuaikan kembali alur prototype

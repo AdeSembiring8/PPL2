@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Membuat Halaman Profil dan perbarui dashboard
 - Andaru: 
   - [x] Memperbaiki desain semua page yang belum dirapikan
   - [X] Memperbaiki alur prototype

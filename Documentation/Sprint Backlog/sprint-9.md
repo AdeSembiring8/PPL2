@@ -17,7 +17,7 @@
 - Kamal :
   - [x] 
 - Ade   : 
-  - [x] 
+  - [x] Integrasi BE dan FE untuk halaman login register
 - Andaru: 
   - [x] Membuat Desain Payment Gateway
   - [X] Menambahkan dan menyesuaikan kembali alur prototype
