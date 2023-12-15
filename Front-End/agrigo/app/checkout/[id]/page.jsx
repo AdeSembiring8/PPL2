@@ -63,7 +63,7 @@ export default function Home({ params }) {
         setAlamatModalVisible(false);
         const DataAddress = `${valueAlamat}, Provinsi ${selectedProvince}, ${selectedRegencyId}, Kec. ${selectedDistrictId}, Kel/Desa. ${selectedVillageId}`;
         setDataAddress(DataAddress);
-        localStorage.setItem('alamat :', DataAddress);
+        localStorage.setItem('alamat', DataAddress);
 
     };
 
