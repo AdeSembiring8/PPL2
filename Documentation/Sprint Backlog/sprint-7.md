@@ -22,7 +22,7 @@
   - [x] Memperbaiki desain semua page yang belum dirapikan
   - [X] Memperbaiki alur prototype
 - Attila: 
-  - [x] 
+  - [x] Melakukan testing pada API
 #### Delivered:	 4 SP
 ### During Sprint
 6-11-2023:
