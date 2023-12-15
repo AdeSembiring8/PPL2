@@ -22,7 +22,7 @@
   - [x] Membuat Design Login page, Checkout page, dan Pesanan saya page
   - [X] Membuat prototype
 - Attila: 
-  - [x] 
+  - [x] Membantu front end finalisasi register page
 #### Delivered:	 4 SP
 ### During Sprint
 16-10-2023:
