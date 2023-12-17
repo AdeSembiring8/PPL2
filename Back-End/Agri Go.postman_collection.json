@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "866e73e3-c43a-4543-a992-1045d41967d6",
+		"name": "Agri Go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14276593"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"royalgen\",\r\n    \"password\": \"kamalganteng\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.221.249.20:8080/api/register",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"royalgen\",\r\n    \"password\": \"kamalganteng\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.221.249.20:8080/api/login",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Google",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/login/google",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login",
+						"google"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/logout",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/products",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductsById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/products/656e0c412bdae0ba3854fc44",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"656e0c412bdae0ba3854fc44"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/categories",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provinces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/provinces",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"provinces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Regencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/regencies/12",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"regencies",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Districts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/districts/1201",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"districts",
+						"1201"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Villages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/villages/1201060",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"villages",
+						"1201060"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TransactionsByUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/transactions/656e0c412bdae0ba3854fc44",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"656e0c412bdae0ba3854fc44"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"656e0c412bdae0ba3854fc44\",\r\n  \"productId\": \"656e0c412bdae0ba3854fc44\",\r\n  \"address\": \"testing\",\r\n  \"shipping\": \"reguler\",\r\n  \"quantity\": 10,\r\n  \"total\": 10000,\r\n  \"adminFee\": 5000,\r\n  \"shippingFee\": 5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.221.249.20:8080/api/checkout",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Avatar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "52.221.249.20:8080/api/generateAvatar?name=irfan kamal",
+					"host": [
+						"52",
+						"221",
+						"249",
+						"20"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"generateAvatar"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "irfan kamal"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
